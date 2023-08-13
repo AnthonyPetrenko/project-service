@@ -1,0 +1,12 @@
+#Server settings
+server.port=8081
+
+#DB connection settings
+spring.datasource.url=jdbc:postgresql://localhost:5432/my_db
+spring.datasource.username=my_username
+spring.datasource.password=my_password
+
+#Liquibase settings
+spring.liquibase.change-log=classpath:/db/changelog/db.changelog-master.yaml
+spring.liquibase.enabled=true
+spring.liquibase.drop-first=false
