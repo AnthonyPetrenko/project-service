@@ -5,6 +5,7 @@ import com.example.projectservice.model.Project;
 import com.example.projectservice.repository.ProjectRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +23,17 @@ public class ProjectService {
         this.accountFeignClient = accountFeignClient;
     }
 
-    public void createProject(String projectName) {
-        projectRepository.save(new Project(projectName));
+    public boolean createProject(String projectName) {
+        projectName = (projectName == null || projectName.isEmpty()) ? "N/A" : projectName;
+
+        try{
+            projectRepository.save(new Project(projectName));
+            log.info("Project " + projectName + " has been created.");
+            return true;
+        } catch (DataAccessException exception){
+            log.error("Error while saving project: " + exception.getMessage());
+            return false;
+        }
     }
 
     @Transactional

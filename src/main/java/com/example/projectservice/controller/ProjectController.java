@@ -19,10 +19,16 @@ public class ProjectController {
     public ResponseEntity<String> createProject
             (@RequestParam(name = "project-name", required = false) String projectName) {
 
-        projectName = projectName == null ? "N/A" : projectName;
-        projectService.createProject(projectName);
+        if (projectService.createProject(projectName)){
+            return ResponseEntity
+                    .ok("Project has been created.");
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Project hasn't been created.");
+        }
 
-        return ResponseEntity.ok("Project has been created.");
+
     }
 
     @PostMapping("/delete")
