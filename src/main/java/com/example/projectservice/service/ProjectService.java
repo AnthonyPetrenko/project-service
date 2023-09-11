@@ -38,6 +38,7 @@ public class ProjectService {
 
     @Transactional
     public void changeStatus(long projectId) {
+
         int isChanged = projectRepository.updateStatusByProjectId(projectId);
 
         String logMessage = isChanged == 1

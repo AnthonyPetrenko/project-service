@@ -19,7 +19,7 @@ public class ProjectController {
     public ResponseEntity<String> createProject
             (@RequestParam(name = "project-name", required = false) String projectName) {
 
-        if (projectService.createProject(projectName)){
+        if (projectService.createProject(projectName)) {
             return ResponseEntity
                     .ok("Project has been created.");
         } else {
@@ -27,15 +27,13 @@ public class ProjectController {
                     .badRequest()
                     .body("Project hasn't been created.");
         }
-
-
     }
 
     @PostMapping("/delete")
     public ResponseEntity<String> deleteProjectById
-            (@RequestParam("project-id") long projectId){
+            (@RequestParam("project-id") long projectId) {
 
-        if (projectService.deleteProjectById(projectId)){
+        if (projectService.deleteProjectById(projectId)) {
             return ResponseEntity
                     .ok("Project with project ID " + projectId + " has been deleted.");
         } else {
@@ -45,13 +43,13 @@ public class ProjectController {
         }
     }
 
-    @PostMapping("/change-status")
-    public void changeProjectStatus(@RequestParam ("project-id") long projectId) {
-        projectService.changeStatus(projectId);
-    }
+//    @PostMapping("/change-status")
+//    public void changeProjectStatus(@RequestParam("project-id") long projectId) {
+//        projectService.changeStatus(projectId);
+//    }
 
     @GetMapping("/check-project")
-    public boolean checkIfProjectExist(@RequestParam ("project-id") long projectId) {
+    public boolean checkIfProjectExist(@RequestParam("project-id") long projectId) {
         return projectService.checkIfProjectExist(projectId);
     }
 
